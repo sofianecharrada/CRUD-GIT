@@ -1,0 +1,22 @@
+<nav class="bg-gray-900 py-4">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- Logo / Accueil -->
+        <a href="{{ path('home.index') }}" class="text-2xl font-bold text-white hover:text-gray-300 transition duration-200 ease-in-out">
+            Accueil
+        </a>
+        
+        <!-- Menu -->
+        <ul class="flex space-x-6">
+            <li>
+                <a href="{{ path('matieres.index') }}" class="text-lg text-white hover:text-blue-400 transition duration-200 ease-in-out">
+                    Matières
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('cours.index') }}" class="text-lg text-white hover:text-blue-400 transition duration-200 ease-in-out">
+                    Cours
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

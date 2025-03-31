@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes matières
+{% endblock %}
+
+{% block body %}
+	<section class="py-12 bg-gray-100">
+		<div
+			class="container mx-auto px-4">
+			<!-- Title Section -->
+			<div class="text-center mb-10">
+				<h1 class="text-4xl font-extrabold text-gray-900 mb-4">Mes matières</h1>
+				<p class="text-lg text-gray-600 mb-6">
+					Gérez vos matières de manière simple et intuitive. Ajoutez, modifiez ou supprimez-les en quelques clics.
+				</p>
+				<a href="{{ path('matieres.new') }}" class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+					<i class="fas fa-plus-circle mr-2"></i>Créer une matière
+				</a>
+			</div>
+
+			<!-- Card for Table -->
+			<div class="bg-white shadow-xl rounded-lg overflow-hidden">
+				<div class="p-6">
+					<div class="overflow-x-auto">
+						<table class="min-w-full table-auto text-center">
+							<thead class="bg-gray-800 text-white">
+								<tr>
+									<th class="py-3 px-4 text-sm font-semibold">#</th>
+									<th class="py-3 px-4 text-sm font-semibold">Nom</th>
+									<th class="py-3 px-4 text-sm font-semibold">Cours associés</th>
+									<th class="py-3 px-4 text-sm font-semibold">Édition</th>
+									<th class="py-3 px-4 text-sm font-semibold">Suppression</th>
+									<th class="py-3 px-4 text-sm font-semibold">Détails</th>
+								</tr>
+							</thead>
+							<tbody class="text-gray-800">
+								{% for matiere in matieres %}
+									<tr class="hover:bg-gray-50">
+										<td class="py-3 px-4">{{ matiere.id }}</td>
+										<td class="py-3 px-4">{{ matiere.name }}</td>
+										<td class="py-3 px-4">
+											{% if matiere.cours is not empty %}
+												{{ matiere.cours|length }}
+											{% else %}
+												Aucun
+											{% endif %}
+										</td>
+										<td class="py-3 px-4">
+											<a href="{{ path('matieres.edit', { id: matiere.id }) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out">
+												<i class="fas fa-pen"></i>
+												Modifier
+											</a>
+										</td>
+										<td class="py-3 px-4">
+												<i class="fas fa-pen"></i>
+												<form
+													action="{{ path('matieres.delete', {'id': matiere.id}) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette matière ?');">
+                                                    <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out">Supprimer</button>
+													<!-- Protection CSRF -->
+													<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ matiere.id) }}">
+
+													
+												</form>
+										</td>
+
+										<td class="py-3 px-4">
+											<a href="{{ path('matieres.show', { id: matiere.id }) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out">
+												<i class="fas fa-eye"></i>
+												Voir
+											</a>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="6" class="text-center py-3 text-gray-500 italic">Aucune matière disponible pour le moment.</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

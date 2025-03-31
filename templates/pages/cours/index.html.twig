@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes Cours{% endblock %}
+
+{% block body %}
+<section class="py-12 bg-gray-100">
+    <div class="container mx-auto px-4">
+        <!-- Title Section -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-extrabold text-gray-900 mb-4">Mes Cours</h1>
+            <p class="text-lg text-gray-600 mb-6">
+                Gérez vos cours de manière simple et intuitive. Ajoutez, modifiez ou supprimez-les en quelques clics.
+            </p>
+            <a href="{{ path('cours.new') }}" class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300 ease-in-out">
+                <i class="fas fa-plus-circle mr-2"></i>Créer un cours
+            </a>
+        </div>
+
+        <!-- Card for Table -->
+        <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+            <div class="p-6">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full table-auto text-center">
+                        <thead class="bg-gray-800 text-white">
+                            <tr>
+                                <th class="py-3 px-4 text-sm font-semibold">#</th>
+                                <th class="py-3 px-4 text-sm font-semibold">Nom du cours</th>
+                                <th class="py-3 px-4 text-sm font-semibold">Matière</th>
+                                <th class="py-3 px-4 text-sm font-semibold">Édition</th>
+                                <th class="py-3 px-4 text-sm font-semibold">Suppression</th>
+                                <th class="py-3 px-4 text-sm font-semibold">Détails</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-800">
+                            {% for cours in cours %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4">{{ cours.id }}</td>
+                                    <td class="py-3 px-4">{{ cours.name }}</td>
+                                    <td class="py-3 px-4">
+                                        {{ cours.matiere ? cours.matiere.name : 'Non attribuée' }}
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ path('cours.edit', { id: cours.id }) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out">
+                                            <i class="fas fa-pen"></i> Modifier
+                                        </a>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ path('cours.delete', { id: cours.id }) }}" class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce cours ?');">
+                                            <i class="fas fa-trash"></i> Supprimer
+                                        </a>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ path('cours.show', { id: cours.id }) }}" class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-md text-sm transition duration-300 ease-in-out">
+                                            <i class="fas fa-eye"></i> Voir
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-3 text-gray-500 italic">Aucun cours disponible pour le moment.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll to top button -->
+        <div class="text-end mt-6">
+            <a href="#" class="bg-gray-600 hover:bg-gray-700 text-white text-sm py-2 px-4 rounded-full transition duration-300 ease-in-out" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                <i class="fas fa-arrow-up"></i> Retour en haut
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

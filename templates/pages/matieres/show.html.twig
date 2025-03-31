@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du Cours - {{ cours.name }}{% endblock %}
+
+{% block body %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h1 class="display-4 fw-bold">{{ cours.name }}</h1>
+
+        <!-- Vérification si un fichier est associé au cours -->
+        {% if cours.filePath %}
+            <p>
+                📄 
+                <!-- Lien de téléchargement du fichier -->
+                <a href="{{ asset('uploads/cours/' ~ cours.filePath) }}" 
+                   class="btn btn-success" download>
+                    Télécharger la pièce jointe
+                </a>
+            </p>
+        {% else %}
+            <p class="text-muted">Aucune pièce jointe disponible.</p>
+        {% endif %}
+
+        <a href="{{ path('cours.index') }}" class="btn btn-secondary">Retour à la liste</a>
+    </div>
+</section>
+{% endblock %}

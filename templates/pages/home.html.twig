@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+	Accueil
+{% endblock %}
+{% block body %}
+    <div class="bg-gray-50 py-10">
+        <div class="container mx-auto max-w-4xl px-4">
+            <h1 class="text-4xl font-extrabold text-center text-gray-800 mb-8">
+                Gestion des Matières et des Cours
+            </h1>
+            <p class="text-lg text-gray-600 text-center mb-10">
+                Bienvenue sur votre tableau de bord. Gérez vos Matières et vos Cours en toute simplicité.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="{{ path('matieres.index') }}"
+                   class="bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                    Afficher mes Matières
+                </a>
+                <a href="{{ path('cours.index') }}"
+                   class="bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300">
+                    Afficher mes Cours
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        cours_files:
+            uri_prefix: /uploads/cours
+            upload_destination: '%kernel.project_dir%/TempPHP'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+
+    #mappings:
+    #    products:
+    #        uri_prefix: /images/products
+    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    #        namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
